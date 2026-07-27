@@ -1,0 +1,26 @@
+{
+  "name": "ziber-games",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/app.js",
+  "scripts": {
+    "start": "nodemon --watch src --ext ts --exec \"tsc && node dist/app.js\"",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kattprinsen/ziber-games.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/kattprinsen/ziber-games/issues"
+  },
+  "homepage": "https://github.com/kattprinsen/ziber-games#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

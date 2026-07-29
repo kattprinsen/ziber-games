@@ -1,17 +1,19 @@
+import { fight } from "./components/combat";
 import { processInput, closeInput } from "./components/processInput";
-import { ENEMIES } from "./data/enemies";
+import { ENEMIES, HEROES } from "./data/enemies";
 
 
 async function mainLoop(){
-    const iterations = 3; // Change this number for different iterations
+    const hero = HEROES.Human;
+    console.log(`You are playing as ${hero.name} (HP: ${hero.health}, DMG: ${hero.damage})`);
 
-    for (let index = 0; index < iterations; index++) {
-        const attack = await processInput("Attack?");
-        console.log("You", attack);
-        for (const[key, enemy] of Object.entries(ENEMIES)){
-            console.log(key, enemy.name, enemy.damage)        
-        } 
+    for (const[key, enemy] of Object.entries(ENEMIES)){
+        console.log(`\nNext enemy: ${enemy.name} (HP: ${enemy.health}, DMG: ${enemy.damage})`);
+        const input = await processInput("Press ENTER to attack...");
+        const result = fight(hero, enemy);
+        console.log(result);
     }
+
     closeInput();
 }
 

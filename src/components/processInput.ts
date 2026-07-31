@@ -18,12 +18,7 @@ export function closeInput(){
 export function processInput(question: string): Promise<string>{
     return new Promise((resolve) =>{
         rl.question(question, (answer: string) => {
-            const ans = answer.toLowerCase();
-            if(ans === "y"){
-                //console.log(ans);
-                resolve(ans);
-            }
-            resolve("skip")
+            resolve(answer.toLowerCase().trim());
         });
     });
 }

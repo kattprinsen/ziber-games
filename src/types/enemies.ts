@@ -1,5 +1,6 @@
 export type Enemy = {
     name: string;
-    damage: number;
+    attack: number;
+    defense: number;
     health: number;
 }

@@ -1,5 +1,6 @@
 import { Enemy } from "../types/enemies";
 import { Hero } from "../types/hero";
+import { attackDiceRoll } from "./diceRoll";
 
 /**
  * COMBAT ROUNDS
@@ -9,9 +10,10 @@ import { Hero } from "../types/hero";
 export function fight(hero: Hero, enemy: Enemy): string {
     let heroHp = hero.health;
     let enemyHp = enemy.health;
+    const attackNumber = attackDiceRoll(hero.attack, enemy.defense);
 
     while(heroHp > 0 && enemyHp > 0) {
-        enemyHp -= hero.attack;
+        enemyHp -= attackNumber;
         if(enemyHp <= 0)break;
         heroHp -= enemy.attack;
     }

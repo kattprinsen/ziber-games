@@ -1,3 +1,5 @@
+import { rollToDefense } from "./defense";
+
 /**
  * Making some notes of the combat system 1.0
  * 1. Rolldice to see if you hit (crit / miss aswell)
@@ -18,12 +20,17 @@ export function rollDice(): number {
 function rollToHit(attack: number) {
     let diceRolled = rollDice();
     if(diceRolled === 20){
-        rollForCritical(diceRolled, attack);
-        return "CRITICAL HIT";
+        // CRITICAL HIT
+        return rollForCritical(diceRolled, attack);
     } else if(diceRolled === 0){
-        return "CRITICAL MISS!";
+        // CRITICAL MISS
+        return rollForCriticalMiss();
     }
     return rollForDamage(diceRolled, attack);
+}
+
+function rollForCriticalMiss() {
+    return 0;
 }
 
 function rollForCritical(diceResult: number, attack: number) {
@@ -37,6 +44,8 @@ function rollForDamage(diceResult: number, attack: number) {
 }  
 
 export function attackDiceRoll(attack: number, defense: number) {
-    const attackNumber = rollToHit(attack);
-    return attackNumber;
+    let attackNumber = rollToHit(attack);
+    let  defenseNumber = rollToDefense(attackNumber, defense);
+    const attackDicerolled = attackNumber -= defenseNumber;
+    return attackDicerolled;
 }  

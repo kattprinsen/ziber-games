@@ -21,7 +21,7 @@ function rollToHit(attack: number) {
         rollForCritical(diceRolled, attack);
         return "CRITICAL HIT";
     } else if(diceRolled === 0){
-        return "CRITICAL MISS";
+        return "CRITICAL MISS!";
     }
     return rollForDamage(diceRolled, attack);
 }

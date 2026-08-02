@@ -15,7 +15,7 @@ async function mainLoop(){
         for (const [key, enemy] of Object.entries(ENEMIES)){
             const freshEnemy = { ...enemy };
             //console.log("You rolled: ", rollDice());
-            console.log(`\n ${hero.name} is attacking ${freshEnemy.name} and did ${attackDiceRoll(hero.attack, freshEnemy.defense)} damage!`)
+            //console.log(`\n ${hero.name} is attacking ${freshEnemy.name} and did ${attackDiceRoll(hero.attack, freshEnemy.defense)} damage!`)
             console.log(`\nNext enemy: ${freshEnemy.name} (HP: ${freshEnemy.health}, DMG: ${freshEnemy.attack})`);
             await processInput("Press ENTER to attack...");
             const result = fight(hero, freshEnemy);

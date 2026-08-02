@@ -10,6 +10,12 @@ import { rollToDefense } from "./defense";
  * If CRITICAL MISS hero takes damage
  * 
  */
+
+export type AttackResult = {
+    damage: number;
+    type: "hit" | "critical" | "miss";
+};
+
 export function rollDice(): number {
     const minNum = 1;
     const maxNum = 20;
@@ -17,16 +23,14 @@ export function rollDice(): number {
     return diceRoll
 }
 
-function rollToHit(attack: number) {
+function rollToHit(attack: number): AttackResult {
     let diceRolled = rollDice();
     if(diceRolled === 20){
-        // CRITICAL HIT
-        return rollForCritical(diceRolled, attack);
+        return { damage: rollForCritical(diceRolled, attack), type: "critical" };
     } else if(diceRolled === 0){
-        // CRITICAL MISS
-        return rollForCriticalMiss();
+        return { damage: rollForCriticalMiss(), type: "miss" };
     }
-    return rollForDamage(diceRolled, attack);
+    return { damage: rollForDamage(diceRolled, attack), type: "hit" };
 }
 
 function rollForCriticalMiss() {
@@ -43,9 +47,10 @@ function rollForDamage(diceResult: number, attack: number) {
     return damageRoll;
 }  
 
-export function attackDiceRoll(attack: number, defense: number) {
-    let attackNumber = rollToHit(attack);
-    let  defenseNumber = rollToDefense(attackNumber, defense);
-    const attackDicerolled = attackNumber -= defenseNumber;
-    return attackDicerolled;
+export function attackDiceRoll(attack: number, defense: number): AttackResult {
+    const result = rollToHit(attack);
+    console.log(result);
+    const attackDicerolled = rollToDefense(result.damage, defense);
+    console.log(attackDicerolled);
+    return { damage: attackDicerolled, type: result.type };
 }  

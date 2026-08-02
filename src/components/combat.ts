@@ -10,12 +10,20 @@ import { attackDiceRoll } from "./diceRoll";
 export function fight(hero: Hero, enemy: Enemy): string {
     let heroHp = hero.health;
     let enemyHp = enemy.health;
-    const attackNumber = attackDiceRoll(hero.attack, enemy.defense);
 
     while(heroHp > 0 && enemyHp > 0) {
-        enemyHp -= attackNumber;
-        if(enemyHp <= 0)break;
-        heroHp -= enemy.attack;
+        const heroAttack = attackDiceRoll(hero.attack, enemy.defense);
+        if(heroAttack.type === "critical") console.log(`${hero.name} lands a CRITICAL HIT!`);
+        if(heroAttack.type === "miss") console.log(`${hero.name} CRITICAL MISS :(`);
+        enemyHp -= heroAttack.damage;
+        console.log(`${hero.name} deals ${heroAttack.damage} damage. ${enemy.name} HP: ${Math.max(0, enemyHp)}`);
+        if(enemyHp <= 0) break;
+
+        const enemyAttack = attackDiceRoll(enemy.attack, hero.defense);
+        if(enemyAttack.type === "critical") console.log(`${enemy.name} lands a CRITICAL HIT!`);
+        if(heroAttack.type === "miss") console.log(`${hero.name} CRITICAL MISS :(`);
+        heroHp -= enemyAttack.damage;
+        console.log(`${enemy.name} deals ${enemyAttack.damage} damage. ${hero.name} HP: ${Math.max(0, heroHp)}`);
     }
 
     return heroHp > 0

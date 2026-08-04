@@ -8,6 +8,12 @@ export const ENEMIES: Record<string, Enemy> = {
         defense: 4,
         health: 20 
     },
+    Animal: { 
+        name: "Muta Lion", 
+        attack: 5, 
+        defense: 2,
+        health: 25
+    },
 }
 
 export const HEROES: Record<string, Hero> = {

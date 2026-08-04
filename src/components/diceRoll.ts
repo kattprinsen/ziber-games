@@ -49,8 +49,8 @@ function rollForDamage(diceResult: number, attack: number) {
 
 export function attackDiceRoll(attack: number, defense: number): AttackResult {
     const result = rollToHit(attack);
-    console.log(result);
+    //console.log(result);
     const attackDicerolled = rollToDefense(result.damage, defense);
-    console.log(attackDicerolled);
+    //console.log(attackDicerolled);
     return { damage: attackDicerolled, type: result.type };
 }  

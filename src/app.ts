@@ -1,7 +1,7 @@
-import { fight } from "./components/combat";
-import { attackDiceRoll, rollDice } from "./components/diceRoll";
-import { processInput, closeInput } from "./components/processInput";
-import { ENEMIES, HEROES } from "./data/enemies";
+import { fight } from "./components/combat.js";
+import { processInput, closeInput } from "./components/processInput.js";
+import { ENEMIES, HEROES } from "./data/enemies.js";
+import { animateFight } from "./components/fightAnimation.js";
 
 
 async function mainLoop(){
@@ -9,13 +9,13 @@ async function mainLoop(){
 
     while(playAgain){
         const hero = { ...HEROES.Human };
-        //const playerName = await processInput("Please select a Hero name!");
         console.log(`\nYou are playing as ${hero.name} (HP: ${hero.health}, DMG: ${hero.attack})`);
         
         for (const [key, enemy] of Object.entries(ENEMIES)){
             const freshEnemy = { ...enemy };
             console.log(`\nNext enemy: ${freshEnemy.name} (HP: ${freshEnemy.health}, DMG: ${freshEnemy.attack}, DEF: ${freshEnemy.defense})`);
             await processInput("Press ENTER to attack...");
+            await animateFight();
             const result = fight(hero, freshEnemy);
             console.log(result);
         }

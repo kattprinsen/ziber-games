@@ -1,6 +1,6 @@
-import { Enemy } from "../types/enemies";
-import { Hero } from "../types/hero";
-import { attackDiceRoll, AttackResult } from "./diceRoll";
+import { Enemy } from "../types/enemies.js";
+import { Hero } from "../types/hero.js";
+import { attackDiceRoll, AttackResult } from "./diceRoll.js";
 
 /**
  * COMBAT ROUNDS

@@ -1,5 +1,5 @@
-import { Enemy } from "../types/enemies";
-import { Hero } from "../types/hero";
+import { Enemy } from "../types/enemies.js";
+import { Hero } from "../types/hero.js";
 
 export const ENEMIES: Record<string, Enemy> = {
     Human: { 

@@ -1,4 +1,4 @@
-import { rollToDefense } from "./defense";
+import { rollToDefense } from "./defense.js";
 
 /**
  * Making some notes of the combat system 1.0

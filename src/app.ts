@@ -1,7 +1,8 @@
 import { fight } from "./components/combat.js";
 import { processInput, closeInput } from "./components/processInput.js";
 import { ENEMIES, HEROES } from "./data/enemies.js";
-import { animateFight } from "./components/fightAnimation.js";
+import { animateFight } from "./components/animations/fightAnimation.js";
+import { startAnimation } from "./components/animations/startAnimation.js";
 
 
 async function mainLoop(){
@@ -9,6 +10,7 @@ async function mainLoop(){
 
     while(playAgain){
         const hero = { ...HEROES.Human };
+        await startAnimation();
         console.log(`\nYou are playing as ${hero.name} (HP: ${hero.health}, DMG: ${hero.attack})`);
         
         for (const [key, enemy] of Object.entries(ENEMIES)){

@@ -18,7 +18,7 @@ async function mainLoop(){
             console.log(`\nNext enemy: ${freshEnemy.name} (HP: ${freshEnemy.health}, DMG: ${freshEnemy.attack}, DEF: ${freshEnemy.defense})`);
             await processInput("Press ENTER to attack...");
             await animateFight();
-            const result = fight(hero, freshEnemy);
+            const result = await fight(hero, freshEnemy);
             console.log(result);
         }
         await processInput("\nPress ENTER to play again!");

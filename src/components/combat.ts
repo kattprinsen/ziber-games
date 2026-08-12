@@ -1,5 +1,6 @@
 import { Enemy } from "../types/enemies.js";
 import { Hero } from "../types/hero.js";
+import { spinnerAnimation } from "./animations/spinner.js";
 import { attackDiceRoll, AttackResult } from "./diceRoll.js";
 
 /**
@@ -12,7 +13,7 @@ function fightMessage(attackType: AttackResult["type"], name: string) {
     if(attackType === "miss") return console.log(`${name} CRITICAL MISS :(`);
 }
 
-export function fight(hero: Hero, enemy: Enemy): string {
+export async function fight(hero: Hero, enemy: Enemy): Promise<string> {
     let heroHp = hero.health;
     let enemyHp = enemy.health;
 
@@ -27,6 +28,10 @@ export function fight(hero: Hero, enemy: Enemy): string {
         fightMessage(enemyAttack.type, enemy.name);
         heroHp -= enemyAttack.damage;
         console.log(`${enemy.name} deals ${enemyAttack.damage} damage. ${hero.name} HP: ${Math.max(0, heroHp)}`);
+
+        if(heroHp > 0 && enemyHp > 0) {
+            await spinnerAnimation();
+        }
     }
 
     return heroHp > 0

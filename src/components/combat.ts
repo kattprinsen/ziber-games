@@ -1,6 +1,7 @@
 import { Enemy } from "../types/enemies.js";
 import { Hero } from "../types/hero.js";
 import { spinnerAnimation } from "./animations/spinner.js";
+import { victoryAnimation } from "./animations/victoryAnimation.js";
 import { attackDiceRoll, AttackResult } from "./diceRoll.js";
 
 /**
@@ -34,7 +35,9 @@ export async function fight(hero: Hero, enemy: Enemy): Promise<string> {
         }
     }
 
-    return heroHp > 0
-        ? `${hero.name} defeated ${enemy.name}!`
-        : `${enemy.name} defeated ${hero.name}!`;
+    if (heroHp > 0) {
+        await victoryAnimation(hero.name);
+        return `${hero.name} defeated ${enemy.name}!`;
+    }
+    return `${enemy.name} defeated ${hero.name}!`;
 }
